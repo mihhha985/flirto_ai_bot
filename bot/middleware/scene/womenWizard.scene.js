@@ -131,25 +131,7 @@ const fourStep = new Composer();
 fourStep.on('message', async (ctx) => {
    try {
       ctx.wizard.state.data.location = ctx.message.text;
-      console.log('four-step', ctx.wizard.state.data);
-      console.log('two-step', ctx.wizard.state.data);
-      if(ctx.wizard.state.data.is_premium){
-         await ctx.replyWithHTML('Уточнить запрос с помощью методa <i>"prompt"</i> ???', Markup.inlineKeyboard([
-            [
-               Markup.button.callback('Да', 'enter-prompt'),
-               Markup.button.callback('Нет', 'next-step'), 
-            ]
-         ]));
-      }else{
-         await ctx.replyWithHTML('Уточнить запрос с помощью методa <i>"prompt"</i> ???');
-         await ctx.replyWithHTML("<b>Внимание</b> доступно только с <i>Premium</i> подпиской", Markup.inlineKeyboard([
-            [
-               Markup.button.callback('Пропустить', 'next-step'), 
-               Markup.button.callback('Оплатить', 'start_payment')
-            ]   
-         ]));
-      }
-
+      await ctx.replyWithHTML('Опишите максимально подробно, какой тип внешности мужчины Вам нравиться, и какие черты характера по Вашему мнению являюся основными')
       return ctx.wizard.next();
    }catch(e){
       console.log(e);
@@ -157,65 +139,27 @@ fourStep.on('message', async (ctx) => {
 });
 
 const fiveStep = new Composer();
-fiveStep.action('enter-prompt', async (ctx) => {
-   ctx.replyWithHTML('Опишите своими словами <b>тип парня</b>, с которой вы хотели бы познакомиться');
-   return ctx.wizard.next();
-});
-
-fiveStep.action('next-step', async (ctx) => {
-   ctx.replyWithHTML('<b>Внимание!!!</b>\nЕсли не уточнить запрос результат будет абсолютно рандомный.', Markup.keyboard([
-      Markup.button.text('Понятно')
-   ]).oneTime().resize());
-
-   return ctx.wizard.next();
-});
-
-const sixStep = new Composer();
-sixStep.on('message', async (ctx) => {
+fiveStep.on('message', async (ctx) => {
    console.log(ctx.message);
    ctx.wizard.state.data.search = ctx.message.text;
-   if(ctx.wizard.state.data.is_premium){
-      await ctx.replyWithHTML('<b>Начать новый поиск</b>\nУкажите какое количество анкет вам нужно предоставить', Markup.inlineKeyboard([
-         [
-            Markup.button.callback('10шт', '10'), 
-            Markup.button.callback('25шт', '25'),
-         ],
-         [
-            Markup.button.callback('50шт', '50'), 
-            Markup.button.callback('100шт', '100'),
-         ]
-      ]));
-   }else{
-      await ctx.replyWithHTML('<b>Начать новый поиск</b>\nУкажите какое количество анкет вам нужно предоставить');
-      await ctx.replyWithInvoice(getInvoice(ctx.from.id, 10, 289, '10 - анкет'));
-      await ctx.replyWithInvoice(getInvoice(ctx.from.id, 25, 320, '25 - анкет'));
-      await ctx.replyWithInvoice(getInvoice(ctx.from.id, 50, 380, '50 - анкет'));
-      await ctx.replyWithInvoice(getInvoice(ctx.from.id, 100, 450, '100 - анкет'));
-   }
+   await ctx.replyWithHTML('<b>Начать новый поиск</b>\nУкажите какое количество анкет вам нужно предоставить', Markup.inlineKeyboard([
+      [
+         Markup.button.callback('10шт', '10'), 
+         Markup.button.callback('25шт', '25'),
+      ],
+      [
+         Markup.button.callback('50шт', '50'), 
+         Markup.button.callback('100шт', '100'),
+      ]
+   ]));
    return ctx.wizard.next();
 });
 
-const finishText = '<b>Осуществляю поиск по вашему запросу</b>\nОжидайте в течении 72часов вам будут приходить сообщения с анкетами парней, которые по мнению нашего алгоритма наиболее Вам подходят';
+const finishText = '<b>Осуществляю поиск по вашему запросу</b>\nОжидайте в течении 72 часов вам будут приходить сообщения с анкетами парней, которые по мнению нашего алгоритма наиболее Вам подходят';
 const finishStep = new Composer();
 finishStep.on('callback_query', async (ctx) => {
    const count = ctx.callbackQuery.data;
-   await ctx.replyWithChatAction('typing');
-   await ctx.answerCbQuery('Осуществляю поиск по вашему запросу');
    await createPrompt({...ctx.wizard.state.data, count:count});
-
-   if(ctx.wizard.state.data.is_premium){
-      await User.update({ premiumCount: Number(ctx.wizard.state.data.premium_count) - Number(count) }, {
-         where: {
-            id: ctx.wizard.state.data.id
-         }
-       });
-   }
-   /*
-   girls.forEach(girl => {
-      setTimeout(() => false, 800);
-      ctx.replyWithHTML(`<a href="${girl.username}">${girl.firts_name}</a>`);    
-   });
-  */
    await ctx.replyWithHTML(finishText);
    return ctx.scene.leave();
 });
@@ -252,4 +196,4 @@ const getInvoice = (id, count, amount, title) => {
    return invoice
  }
 
-module.exports = new Scenes.WizardScene("womenWizard", startStep, twoStep, threeStep, fourStep, fiveStep, sixStep, finishStep);
+module.exports = new Scenes.WizardScene("womenWizard", startStep, twoStep, threeStep, fourStep, fiveStep, finishStep);
