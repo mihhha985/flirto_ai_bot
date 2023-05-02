@@ -15,7 +15,8 @@ const User = db.define("user", {
          allowNull: false
       },
       firstName: {
-         type: DataTypes.STRING
+         type: DataTypes.STRING,
+         allowNull: false
       },
       lastName: {
          type: DataTypes.STRING

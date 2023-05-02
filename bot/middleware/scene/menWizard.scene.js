@@ -131,8 +131,6 @@ const fourStep = new Composer();
 fourStep.on('message', async (ctx) => {
    try {
       ctx.wizard.state.data.location = ctx.message.text;
-      console.log('four-step', ctx.wizard.state.data);
-      console.log('two-step', ctx.wizard.state.data);
       if(ctx.wizard.state.data.is_premium){
          await ctx.replyWithHTML('Уточнить запрос с помощью методa <i>"prompt"</i> ???', Markup.inlineKeyboard([
             [
