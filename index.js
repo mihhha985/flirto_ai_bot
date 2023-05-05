@@ -26,3 +26,6 @@ require('./bot/middleware/action/startPayment.action')
 // CONNECTION
 require("./bot/connection/local.connection");
 // require("./bot/connection/lambda.connection");
+
+//CRON
+require('./cron/daytask');
