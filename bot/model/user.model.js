@@ -11,8 +11,9 @@ const User = db.define("user", {
          unique: true
       },
       chatID: {
-         type: DataTypes.BIGINT,
-         allowNull: false
+         type: DataTypes.STRING,
+         unique: true,
+         allowNull: false,
       },
       firstName: {
          type: DataTypes.STRING,
@@ -22,28 +23,32 @@ const User = db.define("user", {
          type: DataTypes.STRING
       },
       username: {
-         type: DataTypes.STRING
+         type: DataTypes.STRING,
+         unique: true
       },
       phone:{
-         type: DataTypes.STRING
+         type: DataTypes.STRING,
+         unique: true
       },
       isPremium: {
          type: DataTypes.BOOLEAN,
          defaultValue: false
       },
       premiumTime: {
-         type: DataTypes.BIGINT,
-         defaultValue: 0
+         type: DataTypes.DATE,
       },
       premiumCount: {
          type: DataTypes.INTEGER,
-         defaultValue: 0
       },
-      created: {
-         type: DataTypes.BIGINT,
-         defaultValue: Date.now()
-     }
-   },{timestamps: false});
+   },
+   {
+      indexes: [
+          {
+              unique: true,
+              fields: ['id', 'chatID', 'username']
+          }
+      ]
+});
 
 
 

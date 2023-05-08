@@ -42,7 +42,7 @@ const job = new CronJob(
                     console.log('COUNT: ' + count + ', ID: ' + task[count].id + ' -' + task[count].title);
                     
                     await bot.telegram.sendPhoto(chat, `${task[count].photo}`);
-                    await bot.telegram.sendMessage(chat, `<b>${task[count].title}</b><pre>${task[count].params}</pre>`, {
+                    await bot.telegram.sendMessage(chat, `<b>${task[count].title}</b>\n<pre>${task[count].params}</pre>`, {
                         parse_mode:'HTML',
                         reply_markup:{
                             inline_keyboard: [

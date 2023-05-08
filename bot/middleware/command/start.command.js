@@ -7,14 +7,14 @@ const User = require("../../model/user.model");
 
 module.exports = bot.start(async (ctx) => {
    try {
-      await db.sync();
+      await db.sync({ alter: true });
       const startPayload = ctx.startPayload;
-      const chatID = ctx.chat.id;
+      const chatID = `${ctx.chat.id}`;
       const firstName = ctx.chat.first_name;
       const lastName = ctx.chat.last_name;
       const username = ctx.chat.username;
       
-      const foundUser = await User.findOne({where:{chatID:ctx.chat.id}});
+      const foundUser = await User.findOne({where:{chatID:chatID}});
 
       if (!foundUser) {
          const user = await User.create({
@@ -25,12 +25,20 @@ module.exports = bot.start(async (ctx) => {
             isPremium: false,
             startPayload: startPayload
          });
+      }else{
+         await User.update({updatedAt: Date.now()}, {where: {chatID: chatID}});
       }
       
       await ctx.replyWithHTML(`Привет, <b>${firstName}</b>!`);
-      await ctx.replyWithHTML(`<b>Flirto AI</b> - это нейросеть которая на основе полученной от Вас информации находить, наиболее подходящих вам пользавателей Telegram и отправляет сообщение с предложением познакомится с Вами. Вам больше не нужно тратить время на бесконечный просмотр профилей и бесполезные переписки, всем этим за вас займётся наша нэйросеть. Нужно просто доверится искуственному интелекту, котовый будет анатизировать тонны информаци о пользователях в сети и направлять Вам профили только тех людей которым действительно интерестно Ваше предложение и которые готовы к отношением именно с Вами. `);
-      await ctx.replyWithHTML(`<b>Как всё это работает</b>! - не стоит рассчитывать на какое-то волшебство, для поиска нужного именно Вам человека может уйти не один десяток запросов. Т.к нейросеть будет учитывать Ваше поведение и проявленную активность в отношении предложенных Вам вариантов. Поэтому чтобы добиться нужного Вам результата пожалуйста предоставьте максимум информации о себе. И обязательно прочтите мануал о том как правильно взаимодействовать с данной нейросетью. /manual`);
-      await ctx.reply('Начать новый поиск /prompt')
+      await ctx.replyWithHTML('Для того чтобы нейросеть <b>Flirto AI</b> смогла подобрать Вам идеального партнёра, ответьте на несколько вопросов...');
+      await ctx.replyWithHTML('Укажите ваш <b>ПОЛ</b>', Markup.inlineKeyboard([
+         [
+            Markup.button.callback('Мужской', 'men-wizard-start'), 
+            Markup.button.callback('Женский', 'women-wizard-start'),
+         ],
+      ]));
+
+      return ctx.scene.leave();
    } catch (e) {
       console.log(e);
    }

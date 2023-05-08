@@ -3,16 +3,15 @@ const bot = require("../../connection/token.connection");
 const girls = require("../../../data/girls");
 
 module.exports = bot.command("manual", async (ctx) => {
+   let msg = '1 - Ответьте на несколько простых вопросов.\n\n';
+   msg += '2 - В конце перечислите через запятую все качества, которые вы, хотели бы видеть в человеке.\n\n';
+   msg += '3 - Произведите оплату в соответствии с выбранным количеством анкет.\n\n';
+   msg += '4 - Каждый день бот будет присылать Вам новых пользователей Telegram которые соответствуют вашему запросу.\n\n';
+   msg += '5 - Отлично!!! Наслаждайтесь каждый день новыми знакомствами!';
    try {
-      await ctx.replyWithHTML('Инструкция в разработке');
-      await ctx.replyWithPhoto(`https://mow.escort-koketka.ru/images/girl/18/ava.jpg`);
-      await ctx.replyWithHTML(`<b>Элитная эскорт модель - Влада</b><pre>\nВозраст: 27лет\nРост: 174см\nВес: 60кг\nГрудь: 3 размер</pre>`, Markup.inlineKeyboard([
-         Markup.button.url('Перейти', 'https://mow.escort-koketka.ru/escort-girl/vlada27')
-      ]));
-
-      await ctx.replyWithHTML('Сумма: 290 рублей', Markup.inlineKeyboard([
-         Markup.button.url('Оплатить', 'https://my.qiwi.com/Elena-SQibjutSPs')
-      ]));
+      await ctx.replyWithHTML('<b>Инструкция по использованию бота Flirto AI</b>');
+      await ctx.replyWithHTML(msg);
+      return ctx.scene.leave();
    } catch (e) {
       console.log(e);
    }

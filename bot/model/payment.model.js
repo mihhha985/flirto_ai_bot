@@ -12,10 +12,10 @@ const Payment = db.define("payment", {
         type:DataTypes.STRING,
         allowNull:false
      },
-     date:{
-        type: DataTypes.BIGINT,
-        allowNull:false
-     }
+     created: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  }
 },{timestamps: false});
 
 module.exports = Payment;

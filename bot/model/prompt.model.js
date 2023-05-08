@@ -32,13 +32,13 @@ const Prompt = db.define("prompt", {
         allowNull: false,
     },
     status:{
-        type:DataTypes.BOOLEAN,
+        type:DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: 0,
     },
     created: {
-        type: DataTypes.BIGINT,
-        defaultValue: Date.now()
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
     }
 },{timestamps: false});
 
