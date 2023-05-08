@@ -123,6 +123,7 @@ threeStep.on('callback_query', async (ctx) => {
          await ctx.reply("Укажите по какому городу или области нужно осуществить поиск", Markup.removeKeyboard);
          return ctx.wizard.next();
       }else{
+         await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
          return ctx.scene.leave();
       }
    }catch(e){
@@ -201,6 +202,7 @@ sixStep.on('callback_query', async ctx => {
 
       return ctx.wizard.next(); 
    }else{
+      await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
       return ctx.scene.leave();
    }    
 });

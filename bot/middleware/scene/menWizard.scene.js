@@ -200,6 +200,7 @@ sixStep.on('callback_query', async ctx => {
 
       return ctx.wizard.next(); 
    }else{
+      await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
       return ctx.scene.leave();
    }   
 })
@@ -210,6 +211,7 @@ sevenStep.on('message', async ctx => {
       await ctx.replyWithHTML('<b>Ура!!! Спасибо за оплату!\nПожалуйста, отправьте чек в ответном сообщении...</b>');
       return ctx.wizard.next();
    }else{
+      await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
       return ctx.scene.leave();
    }
 });
