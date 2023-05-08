@@ -36,7 +36,6 @@ const twoStep = new Composer();
 twoStep.action('it-is-loves', async (ctx) => {
    try {
       ctx.wizard.state.data.type = ctx.callbackQuery.data;
-      console.log('two-step', ctx.wizard.state.data);
       await ctx.reply("Каков ваш ежемесячный доход?",  Markup.inlineKeyboard([
             [
                Markup.button.callback('50 000 - 100 000 рублей', 'minimal-price'), 
@@ -124,6 +123,7 @@ threeStep.on('callback_query', async (ctx) => {
          await ctx.reply("Укажите по какому городу или области нужно осуществить поиск", Markup.removeKeyboard);
          return ctx.wizard.next();
       }else{
+         await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
          return ctx.scene.leave();
       }  
    }catch(e){
@@ -134,13 +134,14 @@ threeStep.on('callback_query', async (ctx) => {
 const fourStep = new Composer();
 fourStep.on('message', async (ctx) => {
    try {
-      let location =  ctx.message.text;
-      if(location !== '/start' || location !== '/menu' || location !== '/manual'){
+      let location = `${ctx.message.text.trim()}`;
+      if(location === '/start' || location === '/menu' || location === '/manual'){
+         await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
+         return ctx.scene.leave();
+      }else{
          ctx.wizard.state.data.location = location;
          await ctx.replyWithHTML('Опишите максимально подробно тип девушки, и черты её характера. Что по Вашему мнению должно быть на первом месте!');
          return ctx.wizard.next();
-      }else{
-         return ctx.scene.leave();
       }   
    }catch(e){
       console.log(e);
@@ -150,7 +151,10 @@ fourStep.on('message', async (ctx) => {
 const fiveStep = new Composer();
 fiveStep.on('message', async (ctx) => {
    let search =  ctx.message.text;
-   if(search !== '/start' || search !== '/menu' || search !== '/manual'){
+   if(search === '/start' || search === '/menu' || search === '/manual'){
+      await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
+      return ctx.scene.leave();
+   }else{
       ctx.wizard.state.data.search = search;
       await ctx.replyWithHTML('<b>Начать новый поиск</b>\nУкажите какое количество анкет вам нужно предоставить', Markup.inlineKeyboard([
          [
@@ -162,10 +166,6 @@ fiveStep.on('message', async (ctx) => {
             Markup.button.callback('100шт - 460руб.', '100'),
          ]
       ]));
-
-      return ctx.wizard.next();
-   }else{
-      return ctx.scene.leave();
    }   
 });
 

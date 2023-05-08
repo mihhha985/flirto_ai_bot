@@ -27,4 +27,4 @@ require("./bot/connection/local.connection");
 // require("./bot/connection/lambda.connection");
 
 //CRON
-require('./cron/daytask');
+//require('./cron/daytask');

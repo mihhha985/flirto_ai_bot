@@ -4,14 +4,14 @@ module.exports = [
         title: 'Заказать эскортницу Влада',
         url: 'https://mow.escort-koketka.ru/escort-girl/vlada27',
         photo: 'https://mow.escort-koketka.ru/images/girl/18/ava.jpg',
-        params: 'Возраст: 27 года\nРост: 174 см\nВес: 60 кг\nВолосы: Блондинка\nФигура: Спортивная\nГрудь: 2 размер'
+        params: 'Возраст: 27 лет\nРост: 174 см\nВес: 60 кг\nВолосы: Блондинка\nФигура: Спортивная\nГрудь: 2 размер'
     },
     {
         id:2,
         title: 'Заказать эскортницу Настя',
         url: 'https://mow.escort-koketka.ru/escort-girl/nastya1005',
         photo: 'https://mow.escort-koketka.ru/images/girl/22/ava.jpg',
-        params: 'Возраст: 30 года\nРост: 172 см\nВес: 58 кг\nВолосы: Брюнетка\nФигура: Спортивная\nГрудь: 4 размер'
+        params: 'Возраст: 30 лет\nРост: 172 см\nВес: 58 кг\nВолосы: Брюнетка\nФигура: Спортивная\nГрудь: 4 размер'
     },
     {
         id:3,
@@ -25,7 +25,7 @@ module.exports = [
         title: 'Заказать эскортницу Инга',
         url: 'https://led.escort-koketka.ru/escort-girl/inga26',
         photo: 'https://led.escort-koketka.ru/images/girl/201/ava.jpg',
-        params: 'Возраст: 26 года\nРост: 172 см\nВес: 46 кг\nВолосы: Шатенка\nФигура: Худощавая\nГрудь: 1 размер'
+        params: 'Возраст: 26 лет\nРост: 172 см\nВес: 46 кг\nВолосы: Шатенка\nФигура: Худощавая\nГрудь: 1 размер'
     },
     {
         id:5,
@@ -46,7 +46,7 @@ module.exports = [
         title: 'Заказать эскортницу Роза',
         url: 'https://mow.escort-koketka.ru/escort-girl/roza28',
         photo: 'https://mow.escort-koketka.ru/images/girl/16/ava.jpg',
-        params: 'Возраст: 28 года\nРост: 168 см\nВес: 54 кг\nВолосы: Блондинка\nФигура: Стройная\nГрудь: 3 размер',
+        params: 'Возраст: 28 лет\nРост: 168 см\nВес: 54 кг\nВолосы: Блондинка\nФигура: Стройная\nГрудь: 3 размер',
     },
     {
         id:8,

@@ -134,12 +134,13 @@ const fourStep = new Composer();
 fourStep.on('message', async (ctx) => {
    try {
       let location =  ctx.message.text;
-      if(location !== '/start' || location !== '/menu' || location !== '/manual'){
+      if(location === '/start' || location === '/menu' || location === '/manual'){
+         await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
+         return ctx.scene.leave();
+      }else{
          ctx.wizard.state.data.location = location;
          await ctx.replyWithHTML('Опишите максимально подробно, тип внешности мужчины который Вам подходит, и какие черты характера по Вашему мнению являюся основными');
          return ctx.wizard.next();
-      }else{
-         return ctx.scene.leave();
       }   
    }catch(e){
       console.log(e);
@@ -149,7 +150,10 @@ fourStep.on('message', async (ctx) => {
 const fiveStep = new Composer();
 fiveStep.on('message', async (ctx) => {
    let search =  ctx.message.text;
-   if(search !== '/start' || search !== '/menu' || search !== '/manual'){
+   if(search === '/start' || search === '/menu' || search === '/manual'){
+      await ctx.replyWithHTML('<b>Неверное действие!!!</b>\n\nПожалуйсто перезагрузите бота командой\n<i>/start</i>');
+      return ctx.scene.leave();
+   }else{
       ctx.wizard.state.data.search = search;
       await ctx.replyWithHTML('<b>Начать новый поиск</b>\nУкажите какое количество анкет вам нужно предоставить', Markup.inlineKeyboard([
          [
@@ -163,8 +167,6 @@ fiveStep.on('message', async (ctx) => {
       ]));
 
       return ctx.wizard.next();
-   }else{
-      return ctx.scene.leave();
    }
 });
 
