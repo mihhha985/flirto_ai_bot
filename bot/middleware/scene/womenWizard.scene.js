@@ -174,6 +174,7 @@ fiveStep.on('message', async (ctx) => {
 const sixStep = new Composer();
 sixStep.on('callback_query', async ctx => {
    let count = ctx.callbackQuery.data;
+   console.log(typeof count, count);
    if(count === '10' || count === '25' || count === '50' || count === '100'){
       let sum;
       switch(count) {
