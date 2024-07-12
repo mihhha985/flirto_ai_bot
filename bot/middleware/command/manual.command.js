@@ -1,6 +1,4 @@
-const { Markup } = require("telegraf");
 const bot = require("../../connection/token.connection");
-const girls = require("../../../data/girls");
 
 module.exports = bot.command("manual", async (ctx) => {
    let msg = '1 - Ответьте на несколько простых вопросов.\n\n';

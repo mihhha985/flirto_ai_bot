@@ -13,12 +13,12 @@ let totalUser = 0;
 const errorPath = path.join(__dirname, 'log', 'cron-error.log');
 const successPath = path.join(__dirname, 'log', 'cron-success.log');
 const getDate = (time) => {
-    let date = new Date(Number(time));
-    let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-    let month = date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
-    let minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-    return (day + '.' + month + '.' + date.getFullYear() + ' ' + date.getHours() + ':' + minute);
- }
+  let date = new Date(Number(time));
+  let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  let month = date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+  let minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+  return (day + '.' + month + '.' + date.getFullYear() + ' ' + date.getHours() + ':' + minute);
+}
 
 const job = new CronJob(
     '0 */3 * * * *',

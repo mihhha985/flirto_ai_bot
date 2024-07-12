@@ -3,8 +3,8 @@
 require("./bot/middleware/scene/index.scene");
 
 // ON
-require("./bot/middleware/on/success.pay");
-require("./bot/middleware/on/chechoutQuery.pay");
+//require("./bot/middleware/on/success.pay");
+//require("./bot/middleware/on/chechoutQuery.pay");
 //require('./bot/middleware/on/callbackQuery.text');
 
 // COMMANDS
@@ -27,4 +27,4 @@ require("./bot/connection/local.connection");
 // require("./bot/connection/lambda.connection");
 
 //CRON
-require('./cron/daytask');
+//require('./cron/daytask');
